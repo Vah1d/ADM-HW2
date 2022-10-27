@@ -1,3 +1,13 @@
+#Q1 EDA
+
+def clean(data):
+    df = data.select_dtypes(include = ['number']).dropna()
+    df = data.fillna(0)
+    return df
+
+
+#Q2
+
 def import_dataset_columns(dataset, columns, chunksize):
     df = pd.read_csv(
         dataset, 
@@ -35,11 +45,15 @@ def piegraph_location(no_loc,loc):
 
     plt.show()
 
+
+#Q7
+
 def probQ7(distr):
     distr['20%'] = 0.2*distr['followers'] + distr['followers']
     probability = sum(distr['numbr_likes'] >= distr['20%'])/len(distr['followers'])
-    print('{}% of the posts have 20% more likes than followers of the user that posted the post'.format(round(probability,3)))
+    print('{0:.2%} of the posts have 20% more likes than followers of the user that posted the post'.format(round(probability,3)))
 
+#Q8
 
 def scatter_plot(column1,column2):
     fig, ax = plt.subplots()
