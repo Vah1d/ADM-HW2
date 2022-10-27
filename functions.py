@@ -12,7 +12,7 @@ def import_dataset(dataset, chunksize):
         delimiter='\t', 
         chunksize=chunksize)
     return(df)
-
+ 
 def n_posts(distr):
     print(distr.shape)
     plt.figure(figsize = (1100/72.,4.8))
@@ -34,6 +34,12 @@ def piegraph_location(no_loc,loc):
     ax1.axis('equal')
 
     plt.show()
+
+def probQ7(distr):
+    distr['20%'] = 0.2*distr['followers'] + distr['followers']
+    probability = sum(distr['numbr_likes'] >= distr['20%'])/len(distr['followers'])
+    print('{}% of the posts have 20% more likes than followers of the user that posted the post'.format(round(probability,3)))
+
 
 def scatter_plot(column1,column2):
     fig, ax = plt.subplots()
