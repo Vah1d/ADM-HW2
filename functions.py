@@ -49,7 +49,7 @@ def piegraph_location(no_loc,loc):
 #Q7
 
 def probQ7(distr):
-    distr['20%'] = 0.2*distr['followers'] + distr['followers']
+    distr['20%'] = 0.2*distr['followers']
     probability = sum(distr['numbr_likes'] >= distr['20%'])/len(distr['followers'])
     print('{0:.2%} of the posts have 20% more likes than followers of the user that posted the post'.format(round(probability,3)))
 
