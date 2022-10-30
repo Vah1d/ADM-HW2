@@ -27,9 +27,9 @@ Vahid ghanbarizadeh - 2002527 - ghanbarizadeh.2002527@studenti.uniroma1.it
 
 We used the data provided for us by [Kaggle](https://www.kaggle.com/datasets/shmalex/instagram-dataset?select=instagram_profiles.csv):
 
-*<https://adm2022.s3.amazonaws.com/instagram_posts.zip>
-*<https://adm2022.s3.amazonaws.com/instagram_profiles.zip>
-*<https://adm2022.s3.amazonaws.com/instagram_locations.zip>
+*<https://adm2022.s3.amazonaws.com/instagram_posts.zip>  
+*<https://adm2022.s3.amazonaws.com/instagram_profiles.zip>  
+*<https://adm2022.s3.amazonaws.com/instagram_locations.zip>  
 
 -----------------------------------------------------
 
@@ -38,9 +38,15 @@ We used the data provided for us by [Kaggle](https://www.kaggle.com/datasets/shm
 ---------------------------------------------------
 
 1. `HW2.ipynb`:
-    >This script provides our analysis of the different datasets, already run so it will be easy to understand and not computationally heavy for people who would like to read it.
+   
+   >This script provides our analysis of the different datasets, already run so it will be easy to understand and not computationally heavy for people who would like to read it.
 2. `functions.py`:
-    >A python page containing all the functions, together with descriptions of what our functions do.
+   
+   >A python page containing all the functions, together with descriptions of what our functions do.
 3. `README.md`:
-    > A markdown file which you are reading right now explaining how we worked and the descriptions of our Github repository.
+   
+   > A markdown file which you are reading right now explaining how we worked and the descriptions of our Github repository.
     
+4. `commandline.sh`:
+    
+    >A .sh file to answer the command line questions of our assignment, a terminal based analysis.
