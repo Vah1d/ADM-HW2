@@ -69,5 +69,5 @@ We used the data provided for us by [Kaggle](https://www.kaggle.com/datasets/shm
    
    >A python file containing the functions needed for `RQ1_RQ2_RQ7_RQ8_AQ1.ipynb`.
 
-** ADM.HW2.Group24 files 
+**. `ADM.HW2.Group24 files.ipynb `:
 This script provides our analysis of the different datasets for the all questions
