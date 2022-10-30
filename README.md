@@ -27,9 +27,9 @@ Vahid ghanbarizadeh - 2002527 - ghanbarizadeh.2002527@studenti.uniroma1.it
 
 We used the data provided for us by [Kaggle](https://www.kaggle.com/datasets/shmalex/instagram-dataset?select=instagram_profiles.csv):
 
-*<https://adm2022.s3.amazonaws.com/instagram_posts.zip>  
-*<https://adm2022.s3.amazonaws.com/instagram_profiles.zip>  
-*<https://adm2022.s3.amazonaws.com/instagram_locations.zip>  
+* <https://adm2022.s3.amazonaws.com/instagram_posts.zip>  
+* <https://adm2022.s3.amazonaws.com/instagram_profiles.zip>  
+* <https://adm2022.s3.amazonaws.com/instagram_locations.zip>  
 
 -----------------------------------------------------
 
