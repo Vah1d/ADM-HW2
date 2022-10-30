@@ -210,23 +210,35 @@ def top_profiles_average_likes_and_comments(n, chunksize = 5000):
     print(f"total number of comments: {comments}")
     print(f'average of likes and comments per profile in top {n} list: {(likes+comments)/n}')
 
-def top_profiles_posts_by_intervals_plot(intervals, n = 10, chunksize = 1000000):
+def top_profiles_posts_by_intervals_plot(intervals, n = 10, chunksize = 5000):
+    """
+    description:
+        Plot the number of posts for each given time interval.
+    params:
+        - intervals: list of time intervals;
+        - n: number of top profiles;
+        - chunksize: size of dataset to compute.
+    output:
+        plot with the number of posts for each given interval.
+    """
     intervals_posts = {}
-    df_posts = posts_of_top_profiles(n, chunksize)
-    timestamps_of_posts = df_posts['cts']
-    print(timestamps_of_posts)
-    for chunk in timestamps_of_posts:
-        print(chunk)
-        chunk = pd.to_datetime(chunk)
-        print(chunk)
-        
-        chunk = pd.Series([val.time() for val in chunk])
-        print(chunk)
-        
-        for interval in intervals:
-            anot = interval[0]+' - '+interval[1]
-            intervals_posts[anot] = time_count_in_interval(chunk, interval)
-        
-        break
-    print(intervals_posts)
+    timestamps_of_posts = posts_of_top_profiles(2, chunksize)['cts']
+    chunk = pd.to_datetime(timestamps_of_posts)
+    chunk = pd.Series([val.time() for val in chunk])
+    for interval in intervals:
+        anot = interval[0]+' - '+interval[1]
+        intervals_posts[anot] = time_count_in_interval(chunk, interval)
+    print("Number of posts in time interval:")
+    i = 0
+    for interval, posts in intervals_posts.items():
+        i += 1
+        print(f"{i} interval: {interval} => {posts} posts")
+    df = pd.DataFrame([intervals_posts])
+    plt.bar(
+        [f'{i+1}' for i in range(len(intervals_posts.keys()))], 
+        list(intervals_posts.values()))
+    plt.xlabel("Intervals")
+    plt.ylabel("Number of posts")
+    plt.title("Number of posts to time intervals")
+    
     
