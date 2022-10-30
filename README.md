@@ -1,6 +1,6 @@
 # ADM-HW2
 
-================================================
+--
 
 University of Sapienza- ADM HW 2 
 
@@ -12,7 +12,7 @@ Vahid ghanbarizadeh - 2002527 - ghanbarizadeh.2002527@studenti.uniroma1.it
 Viktoriia Vlasenko - 2088928 - viktoriiavvlasenko@gmail.com  
 Flavio Brizzolari Scrocco - 1608550 - brizzolariscrocco.1608550@studenti.uniroma1.it
 
-================================================
+--
 
 ## Analysis of Instagram posts, profiles & locations:
 
@@ -24,9 +24,9 @@ Flavio Brizzolari Scrocco - 1608550 - brizzolariscrocco.1608550@studenti.uniroma
 
 We used the data provided for us by [Kaggle](https://www.kaggle.com/datasets/shmalex/instagram-dataset?select=instagram_profiles.csv):
 
-*<https://adm2022.s3.amazonaws.com/instagram_posts.zip>
-*<https://adm2022.s3.amazonaws.com/instagram_profiles.zip>
-*<https://adm2022.s3.amazonaws.com/instagram_locations.zip>
+*<https://adm2022.s3.amazonaws.com/instagram_posts.zip>  
+*<https://adm2022.s3.amazonaws.com/instagram_profiles.zip>  
+*<https://adm2022.s3.amazonaws.com/instagram_locations.zip>  
 
 -----------------------------------------------------
 
