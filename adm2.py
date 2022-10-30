@@ -1,31 +1,19 @@
 import pandas as pd
 from datetime import time
 import matplotlib.pyplot as plt
-
-def dataset_dtypes(dataset):
-    """
-    dataset types - .dtypes
-    """
-    df = pd.read_csv(
-        dataset, 
-        delimiter='\t', 
-        encoding = 'ISO-8859-1')
-    print(df.dtypes)
-
-
-def dataset_info(dataset):
-    """
-    FINISH
-    dataset information - .info()
-    """
-    df = pd.read_csv(
-        dataset, 
-        delimiter='\t', 
-        chunksize=5,
-        encoding = 'ISO-8859-1')
-    print(df.info())
+import csv
     
-def import_dataset_columns(dataset, columns, chunksize):
+def import_dataset_columns(dataset, columns, chunksize = 5000):
+    """
+    description:
+        Importing dataset with defined columns.
+    params:
+        - dataset: name of the file with data;
+        - columns: list of columns to retrieve from dataset;
+        - chunksize: size of dataset to compute.
+    return:
+        dataset in format "TextFileReader".
+    """
     df = pd.read_csv(
         dataset, 
         delimiter='\t', 
@@ -34,27 +22,45 @@ def import_dataset_columns(dataset, columns, chunksize):
         usecols=[*columns])
     return df
 
-def import_dataset(dataset, chunksize):
+def import_dataset(dataset, chunksize = 5000):
+    """
+    description:
+        Importing whole dataset.
+    params:
+        - dataset: name of the file with data;
+        - chunksize: size of dataset to compute.
+    return:
+        dataset in format "TextFileReader".
+    """
     df = pd.read_csv(
         dataset, 
         delimiter='\t', 
         chunksize=chunksize, 
         encoding = 'ISO-8859-1')
     return df
-
-def hello(name):
-    print(f"Hello, {name}!")
     
-
-"""
-1) What is the most common time in which users publish their posts?
-"""
-# count number of rows in interval
 def time_count_in_interval(chunk, interval):
+    """
+    description:
+        Searching number of posts (in chunk) in defined time interval.
+    params:
+        - chunksize: size of dataset to compute,
+        - interval: list of start and end of time interval, e.g. ['00:00:00', '01:00:00'].
+    return:
+        number of posts in defined time interval.
+    """
     return chunk.loc[(chunk > time.fromisoformat(interval[0])) & (chunk <= time.fromisoformat(interval[1]))].count()
 
-# q3.1 function
-def common_time(chunksize = 5):
+def common_time(chunksize = 5000):
+    """
+    RQ3
+    description:
+        1) What is the most common time in which users publish their posts?
+    params:
+        - chunksize: size of dataset to compute.
+    output:
+        the most common time interval and number of posts in that interval
+    """
     intervals = []
     for i in range(0, 24):
         if i < 10:
@@ -79,7 +85,17 @@ def common_time(chunksize = 5):
         if v == max_count_of_posts:
             print(f"{k}: {v} posts")
 
-def plot_intervals_posts(intervals, chunksize = 5):
+def plot_intervals_posts(intervals, chunksize = 5000):
+    """
+    RQ3
+    description:
+        2) Plot the number of posts for each given time interval.
+    params:
+        - intervals: list of time intervals;
+        - chunksize: size of dataset to compute.
+    output:
+        plot with the number of posts for each given interval.
+    """
     intervals_posts = {}
     data = import_dataset_columns("instagram_posts.csv", ['cts'], chunksize)
     for chunk in data:
@@ -95,23 +111,25 @@ def plot_intervals_posts(intervals, chunksize = 5):
         i += 1
         print(f"{i} interval: {interval} => {posts} posts")
     df = pd.DataFrame([intervals_posts])
-    
-    
-    
     plt.bar(
         [f'{i+1}' for i in range(len(intervals_posts.keys()))], 
-        list(intervals_posts.values())
-    )
-
-    # Labelling 
-
+        list(intervals_posts.values()))
     plt.xlabel("Intervals")
     plt.ylabel("Number of posts")
     plt.title("Number of posts to time intervals")
 
     
-# Write a function that, given a profile_id, will be able to return the posts that belong to the given profile_id
-def findPostsByProfileId(profile_id, chunksize = 5):
+def findPostsByProfileId(profile_id, chunksize = 5000):
+    """
+    RQ4
+    description:
+        1) Searching the posts by user (profile_id).
+    params:
+        - profile_id: user profile id;
+        - chunksize: size of dataset to compute.
+    return:
+        posts that belong to the given profile_id or message about its absence.
+    """
     data = import_dataset_columns("instagram_posts.csv", 
                                   [
                                       'profile_id', 
@@ -119,7 +137,8 @@ def findPostsByProfileId(profile_id, chunksize = 5):
                                       'post_type', 
                                       'description', 
                                       'numbr_likes',
-                                      'number_comments'
+                                      'number_comments', 
+                                      'cts'
                                   ], 
                                   chunksize)
     for chunk in data:
@@ -130,15 +149,20 @@ def findPostsByProfileId(profile_id, chunksize = 5):
             #return search
         else:
             print(f"{len(search.index)} posts")
-            print(search)
+            #print(search)
             return search
         break
 
-"""
-Write another function that, given an input n (an integer), will return the posts that belong to the n top posted profiles (top n profiles that have posted the highest number of posts) that their data is available in the profile.csv using the previously written function.
-"""
-
-def top_profiles(n, chunksize = 5000):
+def top_profiles(n, chunksize):
+    """
+    description:
+        Searching for top n profiles that have posted the highest number of posts.
+    params:
+        - n: number of top profiles;
+        - chunksize: size of dataset to compute.
+    return:
+        list of top n profiles id.
+    """
     data = import_dataset_columns("instagram_posts.csv", ['profile_id', 'post_id'], chunksize)
     for chunk in data:
         sorted_data = chunk.groupby(['profile_id'])['profile_id'].count().sort_values(ascending=False).head(n)
@@ -147,15 +171,34 @@ def top_profiles(n, chunksize = 5000):
         break
 
 def posts_of_top_profiles(n, chunksize = 5000):
+    """
+    description:
+        Searching for top n profiles' posts.
+    params:
+        - n: number of top profiles;
+        - chunksize: size of dataset to compute.
+    return:
+        posts of top n profiles.
+    """
     profiles = top_profiles(n, chunksize)
+    frames = []
     for profile in profiles:
-        findPostsByProfileId(profile, chunksize)
-
-"""
-What is the average number of "likes" and comments of the top 10 profiles with the highest number of posts which their information is available 
-in profile.csv?
-"""
+        frames.append(findPostsByProfileId(profile, chunksize))
+    return pd.concat(frames)
+    
 def top_profiles_average_likes_and_comments(n, chunksize = 5000):
+    """
+    description:
+        Searching the average of likes and comments per profile in top n profiles list.
+    params:
+        - n: number of top profiles;
+        - chunksize: size of dataset to compute.
+    output:
+        information about:
+        - total number of likes of the top n profiles;
+        - total number of comments of the top n profiles;
+        - the average of likes and comments per profile in top n profiles list.
+    """
     profiles = top_profiles(n, chunksize)
     likes = 0
     comments = 0
@@ -167,6 +210,23 @@ def top_profiles_average_likes_and_comments(n, chunksize = 5000):
     print(f"total number of comments: {comments}")
     print(f'average of likes and comments per profile in top {n} list: {(likes+comments)/n}')
 
-"""
-
-"""
+def top_profiles_posts_by_intervals_plot(intervals, n = 10, chunksize = 1000000):
+    intervals_posts = {}
+    df_posts = posts_of_top_profiles(n, chunksize)
+    timestamps_of_posts = df_posts['cts']
+    print(timestamps_of_posts)
+    for chunk in timestamps_of_posts:
+        print(chunk)
+        chunk = pd.to_datetime(chunk)
+        print(chunk)
+        
+        chunk = pd.Series([val.time() for val in chunk])
+        print(chunk)
+        
+        for interval in intervals:
+            anot = interval[0]+' - '+interval[1]
+            intervals_posts[anot] = time_count_in_interval(chunk, interval)
+        
+        break
+    print(intervals_posts)
+    
