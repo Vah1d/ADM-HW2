@@ -1,10 +1,10 @@
-# ADM-HW2
+#Instagram Profiles & Posts
 
 ================================================
 
-University of Sapienza- ADM HW 2 
+Sapienza University of Rome
+Algorithm of data mining and machine learning course 
 
-Instagram Profiles & Posts 
 
 Group Members [Group 24]
 
