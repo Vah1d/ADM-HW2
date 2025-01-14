@@ -22,6 +22,14 @@ Your goal is to answer some research questions (RQs) that may help them discover
 ------------------------------------------------
 Go to this website and download the whole dataset, make sure it includes the files instagram_profiles.csv, instagram_posts.csv and instagram_locations.csv.
 
+We used the data provided for us by Kaggle:
+
+*https://adm2022.s3.amazonaws.com/instagram_posts.zip
+
+*https://adm2022.s3.amazonaws.com/instagram_profiles.zip
+
+*https://adm2022.s3.amazonaws.com/instagram_locations.zip
+
 ### Research questions
 
 --------------------------------------------------
